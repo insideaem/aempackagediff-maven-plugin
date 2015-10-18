@@ -128,8 +128,8 @@ public class AEMPackageDiffMojo extends AbstractMojo {
 			final File[] content = classes.listFiles();
 			for (final File file : content) {
 				this.getLog()
-				.info(String.format("Deleting %s", file.getPath()));
-				file.delete();
+						.info(String.format("Deleting %s", file.getPath()));
+				FileUtils.deleteDirectory(file);
 			}
 			while ((line = input.readLine()) != null) {
 				final int beginIndex = line.indexOf("/jcr_root/");
