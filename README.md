@@ -36,7 +36,7 @@ Here is a sample configuration of the plugin:
   				  In this case simply remove diffCmd from the xml and call maven with 
   				  -Daempackagediff.diffCmd="cmd for diff" -->
   				  <diffCmd>git diff --name-only HEAD~3 HEAD~1 or git diff --name-only SHA1 SHA2</diffCmd>
-  				  <!-- This is the directory where the newly generated filter.xml file will be created created-->
+  				  <!-- This is the directory where the newly generated filter.xml file will be created-->
   					<outputDirectory>${project.build.directory}/aempackagediff</outputDirectory>
   				</configuration>
   			</plugin>
