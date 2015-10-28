@@ -55,3 +55,5 @@ Here is a sample configuration of the plugin:
   	</build>
   </profile>
 ```
+
+[![Build Status](https://travis-ci.org/insideaem/aempackagediff-maven-plugin.svg?branch=master)](https://travis-ci.org/insideaem/aempackagediff-maven-plugin)
