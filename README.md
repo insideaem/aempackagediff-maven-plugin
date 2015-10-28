@@ -7,8 +7,9 @@ Then the configured filter.xml file is changed so that it contains the filter de
 
 ##Configuration
 Here is a sample configuration of the plugin:
-
+ ```xml 
   <profile>
+    <!-- We define a custom profile for this, so that it is not executed by default -->
   	<id>aempackagediff</id>
   	<build>
   		<plugins>
@@ -18,6 +19,7 @@ Here is a sample configuration of the plugin:
   				<executions>
   					<execution>
   						<id>aempackagediff</id>
+  						<!-- We bind the execution of the aempackagediff goal to the prepare-package phase -->
   						<phase>prepare-package</phase>
   						<goals>
   							<goal>aempackagediff</goal>
@@ -25,6 +27,9 @@ Here is a sample configuration of the plugin:
   					</execution>
   				</executions>
   				<configuration>
+  				  <!-- This is key to the execution: Here we configure the command that will return the changed files. This can also be passed as a maven property -Daempackagediff.diffCmd when triggered through a CI tool like Bamboo or Jenkins. You can therefore have a step in the CI that computes the commit from the last build and the one of the current and pass it as parameter. In this case simply remove diffCmd from the xml and call maven with -Daempackagediff.diffCmd -->
+  				  <diffCmd>git diff --name-only HEAD~3 HEAD~1 or git diff --name-only SHA1 SHA2</diffCmd>
+  				  <!-- This is the directory where the newly generated filter.xml file will be created created-->
   					<outputDirectory>${project.build.directory}/aempackagediff</outputDirectory>
   				</configuration>
   			</plugin>
@@ -34,9 +39,11 @@ Here is a sample configuration of the plugin:
   				<artifactId>content-package-maven-plugin</artifactId>
   				<extensions>true</extensions>
   				<configuration>
+  				  <!-- This must point to the directory defined in outputDirectory so that the content-package plugin uses that filter.xml file -->
   					<filterSource>target/aempackagediff/filter.xml</filterSource>
   				</configuration>
   			</plugin>
   		</plugins>
   	</build>
   </profile>
+```
