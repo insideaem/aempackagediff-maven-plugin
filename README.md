@@ -27,7 +27,14 @@ Here is a sample configuration of the plugin:
   					</execution>
   				</executions>
   				<configuration>
-  				  <!-- This is key to the execution: Here we configure the command that will return the changed files. This can also be passed as a maven property -Daempackagediff.diffCmd when triggered through a CI tool like Bamboo or Jenkins. You can therefore have a step in the CI that computes the commit from the last build and the one of the current and pass it as parameter. In this case simply remove diffCmd from the xml and call maven with -Daempackagediff.diffCmd -->
+  				  <!-- This is key to the execution: Here we configure the command that will return 
+  				  the changed files.
+  				  This can also be passed as a maven property -Daempackagediff.diffCmd when triggered 
+  				  through a CI tool like Bamboo or Jenkins.
+  				  You can therefore have a step in the CI that computes the commit from the last build 
+  				  and the one of the current and pass it as parameter.
+  				  In this case simply remove diffCmd from the xml and call maven with 
+  				  -Daempackagediff.diffCmd="cmd for diff" -->
   				  <diffCmd>git diff --name-only HEAD~3 HEAD~1 or git diff --name-only SHA1 SHA2</diffCmd>
   				  <!-- This is the directory where the newly generated filter.xml file will be created created-->
   					<outputDirectory>${project.build.directory}/aempackagediff</outputDirectory>
@@ -39,7 +46,8 @@ Here is a sample configuration of the plugin:
   				<artifactId>content-package-maven-plugin</artifactId>
   				<extensions>true</extensions>
   				<configuration>
-  				  <!-- This must point to the directory defined in outputDirectory so that the content-package plugin uses that filter.xml file -->
+  				  <!-- This must point to the directory defined in outputDirectory so that the 
+  				  content-package plugin uses that filter.xml file -->
   					<filterSource>target/aempackagediff/filter.xml</filterSource>
   				</configuration>
   			</plugin>
